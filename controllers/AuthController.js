@@ -96,7 +96,7 @@ const AuthController = {
             const user = await User.findOne({ email });
             if (user) {
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-                const { password,isPublic, ...others } = user._doc;
+                const { password, ...others } = user._doc;
                 res.cookie("access_token", token, {
                     httpOnly: true,
                     secure: true,
