@@ -112,7 +112,6 @@ const AuthController = {
                     userId: newUser._id,
                     name: newUser.name,
                     email: newUser.email,
-                    image: newUser.img
                 });
                 await newResume.save();
 

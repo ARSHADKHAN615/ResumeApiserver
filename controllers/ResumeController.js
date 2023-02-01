@@ -5,16 +5,11 @@ const User = require('../models/User.js');
 const ResumeController = {
     UpdateResume: async (req, res, next) => {
         if (req.params.userId === req.user.id) {
-            const { image, name, designation, bio, email, phone, address, education, experience, skills, social, frontEnd, fullStack, courses, techStack, languages } = req.body;
-            let imageFiled = "";
-            if (image.length === 2) {
-                imageFiled = image[1].xhr;
-            } else {
-                imageFiled = image[0].url;
-            }
+            const { image, name, designation, bio, email, phone, address, education, experience, skills, social, frontEnd, fullStack, courses, techStack, languages,website } = req.body;
+            let imageFiled = image[image.length-1].xhr;
             try {
                 // update by user id
-                const updateResume = await ResumeData.findOneAndUpdate({ userId: req.user.id }, { $set: { name, image: imageFiled, designation, bio, email, phone, address, education, experience, skills, social, frontEnd, fullStack, courses, techStack, languages } }, { new: true })
+                const updateResume = await ResumeData.findOneAndUpdate({ userId: req.user.id }, { $set: { name, image: imageFiled, designation, bio, email, phone, address, education, experience, skills, social, frontEnd, fullStack, courses, techStack, languages,website } }, { new: true })
                 res.status(200).json(updateResume);
             } catch (error) {
                 return next(error);
