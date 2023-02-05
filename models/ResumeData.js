@@ -12,6 +12,7 @@ const ResumeDataSchema = new mongoose.Schema({
     address: { type: String },
     objective: { type: String },
     skills: { type: [String] },
+    achievements: { type: String },
     education: [{ degree: { type: String }, institution: { type: String }, marks: { type: String }, duration: { type: [Date] } }],
     social: [{ link: { type: String }, name: { type: String } }],
     experience: [{ company: { type: String }, position: { type: String }, duration: { type: [Date] }, description: { type: String }, status: { type: String } }],

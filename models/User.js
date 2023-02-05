@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
     img: { type: String },
     formGoogle: { type: Boolean, default: false },
     isPublic: { type: Boolean, default: false },
+    template: { type: String, default: "1" },
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", UserSchema);

@@ -48,7 +48,22 @@ const UserController = {
                     $set: { isPublic: true }
                 }, { new: true })
                 const { password, updatedAt, ...other } = user._doc;
-                res.status(200).json({ message: "API Successfully Generated!" , other});
+                res.status(200).json({ message: "API Successfully Generated!", other });
+            } catch (error) {
+                return next(error);
+            }
+        } else {
+            return next(CreateNewError(403, "You are only Update your User"));
+        }
+    },
+    ChangeTemplate: async (req, res, next) => {
+        if (req.params.userId === req.user.id) {
+            try {
+                const user = await User.findByIdAndUpdate(req.user.id, {
+                    $set: { template: req.body.template }
+                }, { new: true })
+                const { password, updatedAt, ...other } = user._doc;
+                res.status(200).json({ message: "Template Changed Successfully!", other });
             } catch (error) {
                 return next(error);
             }

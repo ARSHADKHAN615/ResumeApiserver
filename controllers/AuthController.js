@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const CreateNewError = require('../middlewares/errorHandling.js');
 const jwt = require('jsonwebtoken');
 const Resume = require('../models/ResumeData.js');
+const { generateFromEmail } = require('unique-username-generator');
 
 
 const AuthController = {
@@ -103,14 +104,15 @@ const AuthController = {
                     sameSite: "none",
                 }).status(200).json(others);
             } else {
+                const username = generateFromEmail(email,4);
                 const newUser = new User({
-                    name, email, img, formGoogle: true
+                    name:username, email, img, formGoogle: true
                 });
                 await newUser.save();
                 // create resume
                 const newResume = new Resume({
                     userId: newUser._id,
-                    name: newUser.name,
+                    name,
                     email: newUser.email,
                 });
                 await newResume.save();
